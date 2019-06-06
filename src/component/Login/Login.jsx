@@ -13,6 +13,17 @@ class Login extends Component{
         })
     };
 
+    onSubmit = async (e) => {
+        e.preventDefault();
+        const registerResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify(this.state),
+            headers:{
+                "Content-type" : 'application/json'
+            }
+        })}
+
     render(){
         return(
             <div>
