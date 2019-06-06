@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom'
 import * as routes from '../../constants/routes'
-class UserItem extends Component{
+class CampItem extends Component{
    
 
 
@@ -22,5 +22,5 @@ class UserItem extends Component{
     )}
     
 }
-export default UserItem;
+export default CampItem;
 
