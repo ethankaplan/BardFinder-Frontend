@@ -1,10 +1,14 @@
 import React, {Component} from 'react'
 import {Button,Form} from 'semantic-ui-react'
+import * as routes from '../../constants/routes'
+import {withRouter} from 'react-router-dom'
+
 
 class Login extends Component{
     state={
         username:'',
-        password:''
+        password:'',
+        message:""
     }
 
     changeHandler = e => {
@@ -15,21 +19,46 @@ class Login extends Component{
 
     onSubmit = async (e) => {
         e.preventDefault();
-        const registerResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
-            method: 'POST',
-            credentials: 'include',
-            body: JSON.stringify(this.state),
-            headers:{
-                "Content-type" : 'application/json'
+        const loginResponse = await fetch(`http://localhost:3001/users/login`,{
+          method: "POST",
+          credentials: 'include',
+          
+          body: JSON.stringify({username:this.state.username,password:this.state.password}),
+          headers: {
+            "Content-Type" : 'application/json'
+          }
+        })
+        console.log("hit1")
+
+         const semiparsedResponse = await loginResponse.json();
+        const parsedResponse=semiparsedResponse.user;
+         console.log(parsedResponse)
+//fix to have checks in backend later
+            if(parsedResponse.username&&parsedResponse.password===this.state.password){
+              
+                await this.props.doSetCurrentUser(parsedResponse)
+                
+                await this.setState({
+                  logged: true,
+                  message:""
+                  
+                })
+                this.props.history.push(routes.HOME)
+            } else {
+              this.setState({
+                message:"Incorrect information"
+              })
             }
-        })}
+            
+    }
 
     render(){
         return(
             <div>
                 <h2>Login:</h2>
-                <Form>
-                   
+                <div>{this.state.message}</div>
+                <Form onSubmit={this.onSubmit}>
+
                         <Form.Input   
                                 label='Username' 
                                 name='username' 
@@ -52,4 +81,4 @@ class Login extends Component{
         )
     }
 }
-export default Login
+export default withRouter(Login)

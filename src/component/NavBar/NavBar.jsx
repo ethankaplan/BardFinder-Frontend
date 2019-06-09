@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { NavLink } from 'react-router-dom'
-import IncomingModal from '../IncomingUser/IncomingModal'
+
 import * as routes from '../../constants/routes'
 import { Menu } from 'semantic-ui-react'
 
@@ -12,7 +12,7 @@ class NavBar extends Component{
      
     logout=async()=>{
         console.log("logout")
-        const logoutResponse = await fetch(`http://localhost:3001/users/logout`,{
+        const logoutResponse = await fetch(`http://localhost:bard/users/logout`,{
           method: "POST",
           credentials: 'include',
           
@@ -60,7 +60,7 @@ class NavBar extends Component{
                 name='Logout'
                 onClick={this.logout}
                 >LOGOUT</Menu.Item>:
-                <div><NavLink to={routes.LOGIN} activeClassName="selected"><Menu.Item
+                <span><NavLink to={routes.LOGIN} activeClassName="selected"><Menu.Item
                     position='right'
                     name='Login'
                     onClick={this.handleItemClick}
@@ -69,7 +69,7 @@ class NavBar extends Component{
                     position='right'
                     name='REGISTER'
                     onClick={this.handleItemClick}
-                >Register</Menu.Item></NavLink></div>
+                >Register</Menu.Item></NavLink></span>
             }
 
       </Menu>

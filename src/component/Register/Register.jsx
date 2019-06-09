@@ -24,7 +24,7 @@ class Register extends Component{
             <Form.Input icon='mail' 
                             iconPosition='right' 
                             label='Email' 
-                            name='NewEmail' 
+                            name='email' 
                             type='Email' 
                             placeholder='Email'
                             value={this.state.NewEmail}   
@@ -33,7 +33,7 @@ class Register extends Component{
                 <Form.Input icon='user' 
                             iconPosition='right' 
                             label='Username' 
-                            name='NewUsername' 
+                            name='username' 
                             value={this.state.NewUsername} 
                              
                             onChange={this.changeHandler}/>
@@ -41,7 +41,7 @@ class Register extends Component{
                 <Form.Input icon='lock' 
                             iconPosition='right' 
                             label='Password' 
-                            name='NewPassword' 
+                            name='password' 
                             value={this.state.NewPassword} 
                             type='password'   
                             onChange={this.changeHandler}/>
@@ -49,7 +49,7 @@ class Register extends Component{
                 <Form.Input icon='lock' 
                             iconPosition='right' 
                             label='Confirm Password' 
-                            name='ConfirmNewPassword' 
+                            name='confPassword' 
                             value={this.state.ConfirmNewPassword} 
                             type='password'   
                             onChange={this.changeHandler}/>
