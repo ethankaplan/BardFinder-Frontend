@@ -7,6 +7,7 @@ import NavBar from './component/NavBar/NavBar'
 import Login from './component/Login/Login'
 import Register from './component/Register/Register'
 import UserProfile from './component/UserProfile/UserProfile'
+import IndvCampaign from './component/IndvCampaign/IndvCampaign'
 
 import { Switch, Route,withRouter,Redirect } from 'react-router-dom'
 import * as routes from './constants/routes'
@@ -41,7 +42,7 @@ class App extends Component {
           <Route exact path={routes.HOME} render={() => <Welcome/>} />
 
           <Route exact path={routes.CAMP} render={() => <Campaigns/>} />
-          <Route path={`${routes.CAMP}/view/:id`} render={() => <Campaigns/>} />
+          <Route path={`${routes.CAMP}/view/:id`} render={(props) => <IndvCampaign />} />
 
           <Route exact path={routes.USER} 
           render={this.state.currentUser ? 
