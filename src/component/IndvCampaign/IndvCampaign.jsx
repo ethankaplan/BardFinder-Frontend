@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import CharacterItem from './CharacterItem'
 import NewCharModal from './NewCharModal'
+import EditCampModal from './EditCampModal'
 import { Form, TextArea,Modal,Button } from 'semantic-ui-react'
 import * as routes from '../../constants/routes'
 
@@ -10,21 +11,29 @@ class IndvCampaign extends Component {
   state = {
     campaign:false,
     
-    
+    story:"",
     idea:"",
 
   }
 
   componentDidMount() {
    this.getCampInfo()
+
   }
 
-  changeHandler = async(e) => {
-    await this.setState({
+  changeHandler = (e) => {
+     this.setState({
         idea: e.target.value
     })
     console.log(this.state.idea)
 };
+changeStory = (e) => {
+    this.setState({
+       story: e.target.value
+   })
+   console.log(this.state.story)
+};
+    
   getCampInfo=async()=>{
     const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/${this.props.match.params.id}`)
     const char = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/${this.props.match.params.id}/chars`)
@@ -33,7 +42,8 @@ class IndvCampaign extends Component {
     console.log(charJson)
     this.setState({
         campaign:camp.campaign,
-        characters:charJson
+        characters:charJson,
+        story:camp.campaign.story
     })
 
   }
@@ -73,12 +83,27 @@ class IndvCampaign extends Component {
         this.props.history.push(routes.HOME)
     }catch(err){
         console.log(err)
-    }
+    }}
 
+    editStory = async()=>{
+        try {
+            
+          const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/${this.state.campaign._id}`, {
+            method: 'PUT',
+            credentials: 'include',
+            body: JSON.stringify({story:this.state.story}),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          const parsedData = await data.json();
+          console.log(parsedData)
+        } catch (error) {
+          console.log(error)
+        }
+      }
     
-    }
-
-
+ 
 
   render() {
     
@@ -109,7 +134,8 @@ class IndvCampaign extends Component {
             :
             null
         }
-        <button onClick={this.deleteCamp}>DELETE</button>
+       <EditCampModal changeHandler ={this.changeStory} story={this.state.story} editStory={this.editStory} /><br/>
+       <button onClick={this.deleteCamp}>DELETE</button>
 
 
        </div>
