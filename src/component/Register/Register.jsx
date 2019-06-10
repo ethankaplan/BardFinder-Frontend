@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import {Button,Form} from 'semantic-ui-react'
+import * as routes from '../../constants/routes'
+import {withRouter} from 'react-router-dom'
 
 class Register extends Component{
     state={
-        NewUsername:'',
-        NewPassword:'',
-        ConfirmNewPassword:'',
-        NewEmail:'',
+        username:'',
+        password:'',
+        email:'',
         logged: false
     }
 
@@ -16,9 +17,39 @@ class Register extends Component{
         })
     };
 
+    onRegister = async (e) => {
+        e.preventDefault();
+        
+        const registerResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/`, {
+            method: 'POST',
+            credentials: 'include',
+            body: JSON.stringify({username:this.state.username,
+                                  email:this.state.email,
+                                  password:this.state.password,
+                                 }),
+            headers:{
+                "Content-type" : 'application/json'
+            }
+            
+        })
+    
+        const parsedResponse = await registerResponse.json();
+        console.log(parsedResponse)
+        if(parsedResponse.username) {
+          this.props.doSetCurrentUser(parsedResponse)
+            this.setState({
+                logged: true,
+            })
+        }
+        this.props.history.push(routes.HOME)
+    }
+    
+
+
     render(){
         return(
             <div>
+                <h3>{this.state.message}</h3>
                 <h2>Register:</h2>
                 <Form onSubmit={this.onRegister}>
             <Form.Input icon='mail' 
@@ -46,13 +77,7 @@ class Register extends Component{
                             type='password'   
                             onChange={this.changeHandler}/>
 
-                <Form.Input icon='lock' 
-                            iconPosition='right' 
-                            label='Confirm Password' 
-                            name='confPassword' 
-                            value={this.state.ConfirmNewPassword} 
-                            type='password'   
-                            onChange={this.changeHandler}/>
+                
 
                
                 <Button content='Register' primary />
@@ -61,4 +86,4 @@ class Register extends Component{
         )
     }
 }
-export default Register
+export default withRouter(Register)

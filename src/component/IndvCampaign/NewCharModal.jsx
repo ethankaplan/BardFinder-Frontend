@@ -15,7 +15,7 @@ render(){
             <Form onSubmit={this.props.onSubmit}>
                 <Form.Field name="idea">
                     
-                    <TextArea placeholder='Enter Your Idea' onChange={this.props.changeHandler}/>
+                    <TextArea placeholder='Enter Your Idea' name="idea" onChange={this.props.changeHandler}/>
                 </Form.Field>
                 <Form.Field hidden="hidden" name="user" value={this.props.currentUser._id}/>
                     

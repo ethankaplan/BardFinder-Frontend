@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import CampItem from './CampItem'
+import CreateCampaign from '../CreateCampaign/CreateCampaign'
 
 class CampaignList extends Component{
     state={
@@ -32,10 +33,7 @@ class CampaignList extends Component{
         this.getAllCampaigns()
     }
     
-    // allResults = this.state.allUsers.map((user)=>{
-        
-    //     return <UserItem key={user.id} user={user}/>
-    // })
+   
 
 
 
@@ -45,6 +43,10 @@ class CampaignList extends Component{
         
         return(
             <div>
+            {this.props.currentUser ?
+            <CreateCampaign currentUser={this.props.currentUser}/>
+        :
+        null}
             {this.state.loading ?
             <span>LOADING</span>:
             <ul>

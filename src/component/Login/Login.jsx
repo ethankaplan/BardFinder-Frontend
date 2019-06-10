@@ -19,7 +19,7 @@ class Login extends Component{
 
     onSubmit = async (e) => {
         e.preventDefault();
-        const loginResponse = await fetch(`http://localhost:3001/users/login`,{
+        const loginResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/login`,{
           method: "POST",
           credentials: 'include',
           

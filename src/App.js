@@ -41,7 +41,7 @@ class App extends Component {
         <Switch>
           <Route exact path={routes.HOME} render={() => <Welcome/>} />
 
-          <Route exact path={routes.CAMP} render={() => <Campaigns/>} />
+          <Route exact path={routes.CAMP} render={() => <Campaigns currentUser={this.state.currentUser}/>} />
           <Route path={`${routes.CAMP}/view/:id`} render={(props) => <IndvCampaign 
           currentUser={this.state.currentUser}/>} />
 
