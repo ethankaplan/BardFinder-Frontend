@@ -16,7 +16,7 @@ class UserProfile extends Component {
 
 
   render() {
-    console.log(this.props.user.joined.length)
+
     
     return (
       

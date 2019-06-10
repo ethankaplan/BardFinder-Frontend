@@ -28,11 +28,11 @@ class Login extends Component{
             "Content-Type" : 'application/json'
           }
         })
-        console.log("hit1")
+        
 
          const semiparsedResponse = await loginResponse.json();
         const parsedResponse=semiparsedResponse.user;
-         console.log(parsedResponse)
+
 //fix to have checks in backend later
             if(parsedResponse.username&&parsedResponse.password===this.state.password){
               

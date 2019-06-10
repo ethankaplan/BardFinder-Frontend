@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom'
-import CharacterItem from './CharacterItem'
+
 import { Form, TextArea,Modal,Button } from 'semantic-ui-react'
 
 class NewCharModal extends Component{

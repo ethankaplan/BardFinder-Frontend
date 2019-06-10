@@ -10,17 +10,16 @@ class CampaignList extends Component{
     getAllCampaigns =async ()=>{
         try {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.id}/${this.props.context}/`)
-            console.log(res)
+
             const camps = await res.json()
-            console.log(camps)
-            // console.log(res)
+
             this.setState({
                 allCamps: camps.campaigns,
                 loaded:true
             })
-            console.log(this.state.allCamps)
+
         } catch(err) {
-            console.log(err)
+
         }
 
         
@@ -32,7 +31,7 @@ class CampaignList extends Component{
     
 
     render(){
-        console.log(this.state.allCamps)
+
         
         return(
         <div>

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import CharacterItem from './CharacterItem'
 import NewCharModal from './NewCharModal'
 import EditCampModal from './EditCampModal'
-import { Form, TextArea,Modal,Button } from 'semantic-ui-react'
+import { Modal,Button } from 'semantic-ui-react'
 import * as routes from '../../constants/routes'
 
 
@@ -25,13 +25,13 @@ class IndvCampaign extends Component {
      this.setState({
         idea: e.target.value
     })
-    console.log(this.state.idea)
+    
 };
 changeStory = (e) => {
     this.setState({
        story: e.target.value
    })
-   console.log(this.state.story)
+   
 };
     
   getCampInfo=async()=>{
@@ -39,7 +39,7 @@ changeStory = (e) => {
     const char = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/${this.props.match.params.id}/chars`)
     const camp = await res.json();
     const charJson=await char.json()
-    console.log(charJson)
+    
     this.setState({
         campaign:camp.campaign,
         characters:charJson,
@@ -60,7 +60,7 @@ changeStory = (e) => {
             "Content-type" : 'application/json'
         }})
     const parsedResponse = await newCharRes.json();
-    console.log(parsedResponse)
+    
         this.setState({
             idea : ""
         })
@@ -82,7 +82,7 @@ changeStory = (e) => {
         const parsedData = await data.json();
         this.props.history.push(routes.HOME)
     }catch(err){
-        console.log(err)
+        
     }}
 
     editStory = async()=>{
@@ -97,9 +97,9 @@ changeStory = (e) => {
             }
           })
           const parsedData = await data.json();
-          console.log(parsedData)
+          
         } catch (error) {
-          console.log(error)
+         
         }
       }
     

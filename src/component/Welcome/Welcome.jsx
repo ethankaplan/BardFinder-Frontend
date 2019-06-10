@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Button} from 'semantic-ui-react'
+
 
 class Welcome extends Component{
 
@@ -14,8 +14,7 @@ class Welcome extends Component{
                     Or a grand quest that need to be taken care of?<br/>
                     Bard Finder is what you need! We support both DMs and PCs, so if you are looking for a group to tell your story, or looking for a party to join up with, we've got you covered.
                 </p>
-                <Button primary>Register</Button><Button secondary>Log In</Button>
-
+                
             </div>
         )
     }

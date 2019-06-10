@@ -11,7 +11,7 @@ class NavBar extends Component{
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
      
     logout=async()=>{
-        console.log("logout")
+
         const logoutResponse = await fetch(`http://localhost:bard/users/logout`,{
           method: "POST",
           credentials: 'include',
@@ -36,12 +36,12 @@ class NavBar extends Component{
             onClick={this.handleItemClick}
             >
           Home
-        </Menu.Item></NavLink>
+        </Menu.Item></NavLink> 
         {this.props.currentUser ?
         <NavLink to={routes.USER} activeClassName="selected">
             <Menu.Item name='User' active={activeItem === 'User'} onClick={this.handleItemClick}>
             My Account
-        </Menu.Item></NavLink>
+        </Menu.Item></NavLink> 
         :null}
 
         <NavLink to={routes.CAMP} activeClassName="selected">
@@ -51,7 +51,7 @@ class NavBar extends Component{
             onClick={this.handleItemClick}
             >
             Campaigns
-            </Menu.Item></NavLink>
+            </Menu.Item></NavLink> 
 
             {
             this.props.currentUser?
@@ -64,12 +64,12 @@ class NavBar extends Component{
                     position='right'
                     name='Login'
                     onClick={this.handleItemClick}
-                >Login</Menu.Item></NavLink>
+                >Login</Menu.Item></NavLink> 
                 <NavLink to={routes.REGISTER} activeClassName="selected"><Menu.Item
                     position='right'
                     name='REGISTER'
                     onClick={this.handleItemClick}
-                >Register</Menu.Item></NavLink></span>
+                >Register</Menu.Item></NavLink> </span>
             }
 
       </Menu>

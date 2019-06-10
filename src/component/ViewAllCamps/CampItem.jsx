@@ -14,7 +14,7 @@ state={
     getCamp=async()=>{
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/view/${this.props.camp._id}`)
         const camp = await res.json()
-        console.log(camp)
+
         this.setState({
             theCamp : camp.campaign
         })

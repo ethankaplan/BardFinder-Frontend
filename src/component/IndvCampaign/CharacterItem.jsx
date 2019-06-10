@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom'
-import * as routes from '../../constants/routes'
+
 class CharItem extends Component{
    
 
@@ -11,7 +10,7 @@ class CharItem extends Component{
         
     return (
         <li>
-            {this.props.char.user}'s idea:<br/>
+            {this.props.char.user.username}'s idea:<br/>
             <i>{this.props.char.idea}</i>
             
             <br/>

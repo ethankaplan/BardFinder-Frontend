@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
-import { Form, TextArea,Modal,Button } from 'semantic-ui-react'
+import { Form,Modal,Button } from 'semantic-ui-react'
 import * as routes from '../../constants/routes'
 
 class CreateCampaign extends Component{
@@ -14,13 +14,13 @@ class CreateCampaign extends Component{
         await this.setState({
             [e.target.name]: e.target.value
         })
-        console.log(this.state.name)
+        
     };
 
 
     onSubmit = async (e) => {
         e.preventDefault();
-        console.log("button")
+        
         const createRes = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns`,{
           method: "POST",
           credentials: 'include',
@@ -37,7 +37,7 @@ class CreateCampaign extends Component{
 
          const parsedResponse = await createRes.json();
         
-         console.log(parsedResponse)
+         
         this.props.history.push(`${routes.CAMP}/view/${parsedResponse.theid}`)
         
             
