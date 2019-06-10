@@ -14,7 +14,7 @@ render(){
         <Modal trigger={<Button>Edit Story</Button>}>
             <Modal.Header>Edit story</Modal.Header>
             <Modal.Content form>
-            <Form onSubmit={()=>this.props.editStory(this.props.story)}>
+            <Form onSubmit={this.props.editStory}>
                 <Form.Field name="Stroy">
                     
                     <TextArea placeholder='Edit Your Story' name="Story" onChange={this.props.changeHandler} value={this.props.story}/>

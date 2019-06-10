@@ -88,7 +88,7 @@ changeStory = (e) => {
     editStory = async()=>{
         try {
             
-          const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/${this.state.campaign._id}`, {
+          const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/e/${this.state.campaign._id}`, {
             method: 'PUT',
             credentials: 'include',
             body: JSON.stringify({story:this.state.story}),
@@ -107,7 +107,8 @@ changeStory = (e) => {
 
   render() {
     
-    
+    console.log(this.props.currentUser)
+    console.log(this.state.campaign)
     return (
       
       <div>
@@ -134,9 +135,12 @@ changeStory = (e) => {
             :
             null
         }
-       <EditCampModal changeHandler ={this.changeStory} story={this.state.story} editStory={this.editStory} /><br/>
-       <button onClick={this.deleteCamp}>DELETE</button>
 
+        
+       <div><EditCampModal changeHandler ={this.changeStory} story={this.state.story} editStory={this.editStory} /><br/>
+       <button onClick={this.deleteCamp}>DELETE</button></div>
+       
+        
 
        </div>
        :
