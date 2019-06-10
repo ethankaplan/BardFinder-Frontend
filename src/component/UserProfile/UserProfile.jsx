@@ -16,7 +16,7 @@ class UserProfile extends Component {
 
 
   render() {
-    
+    console.log(this.props.user.joined.length)
     
     return (
       
@@ -26,7 +26,8 @@ class UserProfile extends Component {
         Campaign's created:
         <div>
         {this.props.user.campaigns.length>0 ?
-        <span><UserCampList id={this.props.user._id} context="getCamps"/><br/></span>:
+        <span><UserCampList id={this.props.user._id} context="getCamps" 
+        deleteCamp={this.props.deleteCamp}/><br/></span>:
         <span>None yet!</span>}</div>
         <br/>
         <div>

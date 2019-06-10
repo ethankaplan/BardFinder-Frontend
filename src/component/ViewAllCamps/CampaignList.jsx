@@ -53,8 +53,9 @@ class CampaignList extends Component{
             <ul>
                {
                this.state.allCamps.map((camp)=>{
-        
+            
             return <CampItem key={camp.id} camp={camp}/>
+            
             })}</ul>
             }
             </div>

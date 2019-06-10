@@ -11,8 +11,8 @@ class CharItem extends Component{
         
     return (
         <li>
-            {this.props.char.username}'s idea:<br/>
-            {this.props.char.idea}
+            {this.props.char.user}'s idea:<br/>
+            <i>{this.props.char.idea}</i>
             
             <br/>
         </li>

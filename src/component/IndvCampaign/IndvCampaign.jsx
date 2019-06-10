@@ -3,12 +3,14 @@ import { withRouter } from 'react-router-dom'
 import CharacterItem from './CharacterItem'
 import NewCharModal from './NewCharModal'
 import { Form, TextArea,Modal,Button } from 'semantic-ui-react'
+import * as routes from '../../constants/routes'
 
 
 class IndvCampaign extends Component {
   state = {
     campaign:false,
-    clearModal:false,
+    
+    
     idea:"",
 
   }
@@ -25,9 +27,13 @@ class IndvCampaign extends Component {
 };
   getCampInfo=async()=>{
     const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/${this.props.match.params.id}`)
+    const char = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/${this.props.match.params.id}/chars`)
     const camp = await res.json();
+    const charJson=await char.json()
+    console.log(charJson)
     this.setState({
-        campaign:camp.campaign
+        campaign:camp.campaign,
+        characters:charJson
     })
 
   }
@@ -42,22 +48,37 @@ class IndvCampaign extends Component {
                               }),
         headers:{
             "Content-type" : 'application/json'
-        }
-        
-    })
-
+        }})
     const parsedResponse = await newCharRes.json();
     console.log(parsedResponse)
-    if(parsedResponse.username) {
-      this.props.doSetCurrentUser(parsedResponse)
         this.setState({
             idea : ""
         })
-    }
+    
     this.props.history.push(this.props.location)
 }
   
-  
+
+    deleteCamp=async()=>{
+        try{
+        const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/${this.state.campaign._id}/${this.state.campaign.owner}`, {
+            method: 'DELETE',
+            credentials: 'include',
+            body: JSON.stringify(this.state),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const parsedData = await data.json();
+        this.props.history.push(routes.HOME)
+    }catch(err){
+        console.log(err)
+    }
+
+    
+    }
+
+
 
   render() {
     
@@ -72,22 +93,23 @@ class IndvCampaign extends Component {
         
         
         Characters:<br/>
-        {this.state.campaign.characters ?
-        <span>None yet!</span>
-        :
+        {this.state.campaign.characters.length>0 ?
         this.state.campaign.characters.map((char)=>{
         
-        return <CharacterItem key={char.id} char={char}/>}
-
-        )}
+        return <CharacterItem key={char.id} char={char} />}
+            
+        ):
+        <span>None yet!<br/></span>
+        }
         {this.props.currentUser  ?
-            <Modal trigger={<Button>Add Your Character Idea</Button>}>
+            <Modal trigger={<Button onClick={()=>this.setState({clearModal:true})}>Add Your Character Idea</Button>}>
             <NewCharModal currentUser={this.props.currentUser} onSubmit={this.onSubmit} 
             changeHandler={this.changeHandler}/>
             </Modal>
             :
             null
         }
+        <button onClick={this.deleteCamp}>DELETE</button>
 
 
        </div>

@@ -25,10 +25,12 @@ state={
             
             <li>
                 {this.state.theCamp ?
+                
                 <Link to={`${routes.CAMP}/view/${this.props.camp._id}`}>
                     
                 {this.state.theCamp.name} by {this.state.theCamp.owner.username}<br/>
                 <small>{this.state.theCamp.story}</small> </Link>
+                
                 :
                 <span>Loading</span>}
             </li>

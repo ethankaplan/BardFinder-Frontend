@@ -28,6 +28,9 @@ class App extends Component {
       currentUser:false
     })
   }
+
+
+
   render(){
     return (
       <div className="App">
@@ -43,6 +46,7 @@ class App extends Component {
 
           <Route exact path={routes.CAMP} render={() => <Campaigns currentUser={this.state.currentUser}/>} />
           <Route path={`${routes.CAMP}/view/:id`} render={(props) => <IndvCampaign 
+          deleteCamp={this.deleteCamp}
           currentUser={this.state.currentUser}/>} />
 
           <Route exact path={routes.USER} 
