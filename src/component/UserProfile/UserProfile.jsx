@@ -12,6 +12,8 @@ class UserProfile extends Component {
    
   }
 
+  
+
 
   render() {
     
@@ -24,13 +26,13 @@ class UserProfile extends Component {
         Campaign's created:
         <div>
         {this.props.user.campaigns.length>0 ?
-        <span><UserCampList id={this.props.user.id} context="getCamps"/><br/></span>:
+        <span><UserCampList id={this.props.user._id} context="getCamps"/><br/></span>:
         <span>None yet!</span>}</div>
         <br/>
         <div>
         Joined:<br/>
         {this.props.user.joined.length>0 ?
-        <span><UserCampList id={this.props.user.id} context="getJoined"/><br/></span>:
+        <span><UserCampList id={this.props.user._id} context="getJoined"/><br/></span>:
         <span>None yet!</span>}
         </div>
 

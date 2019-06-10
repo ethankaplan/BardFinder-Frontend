@@ -14,7 +14,7 @@ import * as routes from './constants/routes'
 
 class App extends Component {
   state = {
-    currentUser: null
+    currentUser: false
   };
 
   doSetCurrentUser = user => {
@@ -25,7 +25,7 @@ class App extends Component {
   };
   clearCurrentUser=()=>{
     this.setState({
-      currentUser:null
+      currentUser:false
     })
   }
   render(){
@@ -42,7 +42,8 @@ class App extends Component {
           <Route exact path={routes.HOME} render={() => <Welcome/>} />
 
           <Route exact path={routes.CAMP} render={() => <Campaigns/>} />
-          <Route path={`${routes.CAMP}/view/:id`} render={(props) => <IndvCampaign />} />
+          <Route path={`${routes.CAMP}/view/:id`} render={(props) => <IndvCampaign 
+          currentUser={this.state.currentUser}/>} />
 
           <Route exact path={routes.USER} 
           render={this.state.currentUser ? 

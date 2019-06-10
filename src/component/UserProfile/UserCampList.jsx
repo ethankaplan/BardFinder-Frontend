@@ -3,18 +3,22 @@ import CampItem from '../ViewAllCamps/CampItem'
 
 class CampaignList extends Component{
     state={
-        allCamps: []
+        allCamps: [],
+        loaded:false
     }
     
     getAllCampaigns =async ()=>{
         try {
             const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users/${this.props.id}/${this.props.context}/`)
+            console.log(res)
             const camps = await res.json()
-            console.log(camps.data)
+            console.log(camps)
             // console.log(res)
             this.setState({
-                allCamps: camps.data
+                allCamps: camps.campaigns,
+                loaded:true
             })
+            console.log(this.state.allCamps)
         } catch(err) {
             console.log(err)
         }
@@ -26,18 +30,14 @@ class CampaignList extends Component{
         this.getAllCampaigns()
     }
     
-    // allResults = this.state.allUsers.map((user)=>{
-        
-    //     return <UserItem key={user.id} user={user}/>
-    // })
-
-
-
 
     render(){
-        
         console.log(this.state.allCamps)
+        
         return(
+        <div>
+            {this.state.loaded
+                ?
             <ul>
                {
                this.state.allCamps.map((camp)=>{
@@ -46,8 +46,12 @@ class CampaignList extends Component{
     })
                }
             
-            </ul>
-    )
+            </ul>:
+
+            <span>Loading</span>}
+        </div>
+
+)
 }
 }
 
