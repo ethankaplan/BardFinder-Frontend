@@ -107,8 +107,7 @@ changeStory = (e) => {
 
   render() {
     
-    console.log(this.props.currentUser)
-    console.log(this.state.campaign)
+  
     return (
       
       <div>
@@ -136,10 +135,12 @@ changeStory = (e) => {
             null
         }
 
-        
+        {this.props.currentUser._id===this.state.campaign.owner._id?
        <div><EditCampModal changeHandler ={this.changeStory} story={this.state.story} editStory={this.editStory} /><br/>
        <button onClick={this.deleteCamp}>DELETE</button></div>
-       
+       :
+       null
+        }
         
 
        </div>
