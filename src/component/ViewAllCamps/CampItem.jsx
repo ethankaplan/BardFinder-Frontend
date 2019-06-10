@@ -4,16 +4,17 @@ import * as routes from '../../constants/routes'
 class CampItem extends Component{
    
 state={
-   theCamp:null
+   theCamp:null,
+   owner:""
 }
 
     componentDidMount(){
         this.getCamp();
     }
     getCamp=async()=>{
-        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/view/${this.props.camp}`)
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/campaigns/view/${this.props.camp._id}`)
         const camp = await res.json()
-        
+        console.log(camp)
         this.setState({
             theCamp : camp.campaign
         })
@@ -24,9 +25,9 @@ state={
             
             <li>
                 {this.state.theCamp ?
-                <Link to={`${routes.CAMP}/view/${this.props.camp}`}>
-                    Hello!<br/>
-                {this.state.theCamp.name}<br/>
+                <Link to={`${routes.CAMP}/view/${this.props.camp._id}`}>
+                    
+                {this.state.theCamp.name} by {this.state.theCamp.owner.username}<br/>
                 <small>{this.state.theCamp.story}</small> </Link>
                 :
                 <span>Loading</span>}

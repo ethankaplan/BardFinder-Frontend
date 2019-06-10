@@ -16,7 +16,7 @@ class CampaignList extends Component{
             
             console.log(camps)
             // console.log(res)
-            this.setState({
+            await this.setState({
                 allCamps: camps.campaigns,
                 loading:false
 
@@ -31,6 +31,7 @@ class CampaignList extends Component{
     componentDidMount() {
         console.log("mount")
         this.getAllCampaigns()
+        
     }
     
    
@@ -40,7 +41,7 @@ class CampaignList extends Component{
 
     render(){
         
-        
+        console.log(this.state.allCamps)
         return(
             <div>
             {this.props.currentUser ?
@@ -48,14 +49,14 @@ class CampaignList extends Component{
         :
         null}
             {this.state.loading ?
-            <span>LOADING</span>:
+            <span>{this.state.loading}</span>:
             <ul>
                {
                this.state.allCamps.map((camp)=>{
         
             return <CampItem key={camp.id} camp={camp}/>
-            })}
-            </ul>}
+            })}</ul>
+            }
             </div>
     )
 }
