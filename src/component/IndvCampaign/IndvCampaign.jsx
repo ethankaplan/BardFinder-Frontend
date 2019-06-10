@@ -38,7 +38,7 @@ class IndvCampaign extends Component {
         method: 'POST',
         credentials: 'include',
         body: JSON.stringify({idea : this.state.idea,
-                              User : this.props.currentUser._id
+                              user : this.props.currentUser
                               }),
         headers:{
             "Content-type" : 'application/json'
